@@ -2,13 +2,13 @@
   <div class="sample">
     <h2>Sample Page</h2>
     <!--Form-->
-    <Form/>
+    <Form :loading="loading"/>
     <!--Table-->
     <Table :data="listItems">
       <!--delete and edit button-->
       <template v-slot:actions="slotProps">
-        <el-button circle icon="el-icon-delete" @click="sampleStore.deleteItem(slotProps.item.id)"></el-button>
-        <el-button circle icon="el-icon-edit" @click="sampleStore.selectItem(slotProps.item)"></el-button>
+        <el-button circle icon="el-icon-delete" @click="handleDeleteITem(slotProps.item.id)"></el-button>
+        <el-button circle icon="el-icon-edit" @click="handleSelectItem(slotProps.item)"></el-button>
       </template>
     </Table>
   </div>
@@ -17,7 +17,7 @@
 <script>
 import Form from '../../components/Form'
 import Table from '../../components/Table'
-// Gọi tới file xử lí chức năng của component này 
+// Gọi tới file xử lí chức năng của component này
 import useHook from "./hook";
 
 export default {
@@ -28,9 +28,8 @@ export default {
   },
   //Hàm setup chạy trước khi component được khởi tạo
   setup() {
-    const {listItems, sampleStore} = useHook()
-    return {listItems, sampleStore}
-  }
+    return {...useHook()}
+  },
 }
 </script>
 

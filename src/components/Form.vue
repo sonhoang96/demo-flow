@@ -13,15 +13,16 @@
       <el-button
           icon="el-icon-plus"
           circle
-          @click="sampleStore.addItem(name)"
+          @click="handleAddItem(name)"
       />
       <el-button
           v-if="selected.id !== null"
           icon="el-icon-edit"
           circle
           type="success"
-          @click="sampleStore.updateItem({id: selected.id, name})"
+          @click="handleUpdateItem({id: selected.id, name})"
       />
+      <span v-if="loading">Loading</span>
     </el-form-item>
   </el-form>
 </template>
@@ -31,17 +32,20 @@ import useForm from "./useForm";
 
 export default {
   name: 'Form',
-  setup() {
-    const {selected, sampleStore, name, clean} = useForm()
-    return {
-      selected, sampleStore, name, clean
+  props:{
+    loading: {
+      type: Boolean,
+      default: false
     }
+  },
+  setup() {
+    return {...useForm()}
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .form {
-  width: 400px;
+  width: 500px;
 }
 </style>

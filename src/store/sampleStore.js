@@ -4,6 +4,7 @@ import * as APIs from '../api/sampleApi'
 export const useSample = defineStore('sample', {
     state() {
         return {
+            isLoading: false,
             listItems: [],
             selected: {id: null},
             error: null
@@ -35,7 +36,7 @@ export const useSample = defineStore('sample', {
             }
         },
         async updateItem(item) {
-            console.log('item', item)
+            // console.log('item', item)
             try {
                 await APIs.setItem(item)
                 await this.getItems()
